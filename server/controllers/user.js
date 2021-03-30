@@ -1,5 +1,5 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: 梦萦几度
  * @Date: 2021-03-27 20:39:12
  * @LastEditors: 梦萦几度
@@ -14,6 +14,7 @@ import jwt from 'jsonwebtoken'
 
 
 const register = async ctx => {
+  console.log(ctx.request.body)
   const { username, password } = ctx.request.body
 
   if (!username || !password) {
@@ -65,6 +66,30 @@ const login = async ctx => {
   }
 }
 
+const userinfo = async  ctx => {
+  const {token, username} = ctx.request.body
+  console.log('token===', token)
+  let checkTokenRes
+  try {
+    checkTokenRes = jwt.verify(token, SECRET)
+  } catch (e) {
+    checkTokenRes = false
+    console.log('token验证失败', e)
+  }
+  if(!checkTokenRes) {
+    ctx.body = _res.err({code: '0401', msg: 'token验证失败, 请重新登录'})
+    return
+  }
+  const userAllInfo = await user.getUserByName(username)
+  const userInfo = {
+    'username': userAllInfo.username,
+    'userId': userAllInfo.user_id,
+    'avatar': userAllInfo.avatar,
+  }
+  console.log('userInfo==', userInfo)
+  ctx.body = _res.suc({data: userInfo})
+}
+
 const test = async ctx => {
   ctx.body = 'test'
 }
@@ -74,5 +99,6 @@ const test = async ctx => {
 export default {
   register,
   login,
+  userinfo,
   test
 }

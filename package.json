@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "server": "npx babel-node index.js",
-    "dev": "nodemon index.js --exec babel-node"
+    "dev": "nodemon index.js --exec babel-node",
+    "models": "sequelize-auto -o \"./server/schema\" -d college_books -h localhost -u root -p 3306 -x xl123456 -e mysql"
   },
   "author": "myjd",
   "license": "ISC",

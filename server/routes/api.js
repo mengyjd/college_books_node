@@ -7,7 +7,7 @@
  */
 // routes/api.js
 import user from '../controllers/user'
-import goods from '../controllers/goods'
+import {publish, saveImg} from '../controllers/goods'
 import koaRouter from 'koa-router'
 
 const router = koaRouter()
@@ -17,6 +17,7 @@ router.post('/login',user.login)
 router.post('/userinfo',user.userinfo)
 router.get('/test',user.test)
 
-router.post('/publish',goods.publish)
+router.post('/publish',publish)
+router.post('/saveImg',saveImg)
 
 export default router

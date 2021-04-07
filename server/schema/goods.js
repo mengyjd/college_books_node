@@ -14,15 +14,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    goods_imgs_id: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
     goods_price: {
       type: DataTypes.DOUBLE(10,2),
       allowNull: true
     },
-    goods_origina_price: {
+    goods_original_price: {
       type: DataTypes.DOUBLE(10,2),
       allowNull: true
     },

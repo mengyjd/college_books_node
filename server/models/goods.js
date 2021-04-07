@@ -8,21 +8,18 @@
 import initModels from '../schema/init-models'
 import SequelizeDB from '../config/sequelize'
 
-const {user} = initModels(SequelizeDB)
+const {goods, goods_imgs} = initModels(SequelizeDB)
 
-const addUser = async (userInfo) => {
-  await user.create(userInfo)
+const addGoods = async (goodsObj) => {
+  await goods.create(goodsObj)
 }
 
-const getUserByName = async username => {
-  return await user.findOne({
-    where: {
-      username
-    }
-  })
+// 将图片文件保存到数据库
+const saveImgToDB = async (imgObj) => {
+  await goods_imgs.create(imgObj)
 }
 
 module.exports = {
-  addUser,
-  getUserByName
+  addGoods,
+  saveImgToDB
 }
